@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width" , initial-scale="1.0">
+	<title>Player</title>
+	<link rel="stylesheet" type="text/css" href="css/arcticmodal/jquery.arcticmodal-0.3.css">
+	<link rel="stylesheet" type="text/css" href="css/arcticmodal/dark.css">
+	<link rel="stylesheet" href="css/stylesPlayerPage.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+				integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/stylesPrivateOfficePage.css">
+</head>
+<body>
+<header class="header">
+
+	<article class="header__logo">Music App.</article>
+
+	<article class="header__descriptions">
+		<div class="header__title"> Hello,
+			<span class="header__loginName" id="userName"></span>
+		</div>
+		<div class="header__title">Maybe you want to listen to other music?</div>
+		<div class="header__title">Find out what's in trend!</div>
+	</article>
+
+	<article class="header__buttons">
+		<div class="header__reLogIn">
+			<button id="reLogIn" class="header__reLogInButton">Change user</button>
+		</div>
+		<div class="header__transferRatingPage">
+			<button id="playlistVariation" class="header__transferRatingPageButton">
+				Change playlist
+			</button>
+		</div>
+		<div class="header__creaturePlayList">
+			<button id="transferRating" class="header__creaturePlayListButton">View ratings</button>
+		</div>
+	</article>
+</header>
+<section class="page">
+	<div class="player">
+		<div class="player__meta">
+			<div class="player__song">Welcome!</div>
+			<div class="player__artist">Enjoy listening :)</div>
+		</div>
+		<div class="player__bg"></div>
+		<div class="player__controls">
+			<div class="player__controls-bg"></div>
+			<div class="progress">
+				<div class="progress_loaded"></div>
+				<div class="progress_current"></div>
+			</div>
+			<div class="button">
+				<div class="list">
+					<i class="fa fa-list-ul" aria-hidden="true"></i>
+				</div>
+				<div class="back">
+					<i class="fa fa-backward" aria-hidden="true"></i>
+				</div>
+				<div class="controls_play">
+					<i class="fa fa-2x fa-play" aria-hidden="true"></i>
+				</div>
+				<div class="next">
+					<i class="fa fa-forward" aria-hidden="true"></i>
+				</div>
+				<div class="volume_icon">
+					<i class="fa fa-volume-up" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div class="volume">
+				<div class="volume_bar"></div>
+			</div>
+		</div>
+		<div class="overlay"></div>
+	</div>
+	<div class="playlist">
+		<div class="close_playlist">
+			<i class="fa fa-times" aria-hidden="true"></i>
+		</div>
+	</div>
+
+	<div class="modalWindow" style="display: none;">
+		<div class="modalWindow__box box-modal" id="exampleModal_1">
+			<div class="modalWindow__closeButton box-modal_close arcticmodal-close"></div>
+			<div id="modalTitle" class="modalWindow__title"></div>
+			<div id="modalText" class="modalWindow__text"></div>
+		</div>
+	</div>
+</section>
+<!--
+<footer class="footer">
+	<div class="footer__copyright">&copy 2019</div>
+</footer>
+-->
+<script type="text/javascript" src="scripts/source/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="scripts/source/jquery.arcticmodal-0.3.min.js"></script>
+<script type="text/javascript" src="scripts/serverLibrary.js"></script>
+<script type="text/javascript" src="scripts/systemLibrary.js"></script>
+<script type="text/javascript" src="scripts/source/index.min.js"></script>
+<script type="text/javascript" src="scripts/playerPage/playerPage.js"></script>
+</body>
+</html>

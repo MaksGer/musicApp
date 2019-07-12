@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome page</title>
+    <link href="https://fonts.googleapis.com/css?family=Cute+Font|Open+Sans" rel="stylesheet">
+    <link href="css/stylesWelcomePage.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="header">
+    <div class="header__logo">Music App.</div>
+</div>
+
+<div class="wrapper">
+    <div class="wrapper__text">Looking for music? Start listening to the best new releases.</div>
+    <div class="wrapper__buttons">
+        <button id="sign-up-button" class="sign-up-button">Sign up</button>
+        <button id="log-in-button" class="log-in-button">Log in</button>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="footer__copyright">&copy 2019</div>
+</div>
+
+<div id="sign-up-modal" class="sign-up-modal">
+    <div class="sign-up-modal__body">
+    <button id="sign-up-modal__close" title="Close" class="sign-up-modal__close">×</button>
+        <form class="sign-up-modal__form">
+            <h1>To continue, sign up to Music App.</h1>
+          <input type="text" placeholder="First name" id="first-name">
+            <div class="form-error" id="first-name-error">Please, enter your First name.</div>
+
+          <input type="text" placeholder="Last name" id="last-name">
+            <div class="form-error" id="last-name-error">Please, enter your Last name.</div>
+
+          <input type="text" placeholder="E-mail or username" id="username">
+            <div class="form-error" id="username-error">Please, enter your E-mail or username.</div>
+
+          <input type="password" id="password" placeholder="Password">
+            <div class="form-error" id="password-error">Please, enter your password.</div>
+					<div class="form-error" id="log-in-error-same-username">This username is already occupied.</div>
+
+          <button type="button" class="sign-up-modal__form__button" id="sign-up-modal--form--button">Sign up</button>
+        </form>
+    </div>
+</div>
+
+<div id="log-in-modal" class="log-in-modal">
+    <div class="log-in-modal__body">
+        <button id="log-in-modal__close" title="Close" class="log-in-modal__close">×</button>
+        <form class="log-in-modal__form">
+            <h1>To continue, log in to Music App.</h1>
+            <input type="text"  placeholder="E-mail or username" id="log-in-username">
+            <input type="password"  placeholder="Password" id="log-in-password">
+            <div class="form-error" id="log-in-error">Invalid login or password.</div>
+
+            <button type="button" class="log-in-modal__form__button" id="log-in-modal--form--button">Log in</button>
+        </form>
+    </div>
+</div>
+
+<div id="successful-sign-up-modal" class="successful-sign-up-modal" >
+    <div class="successful-sign-up-modal__body">
+        <button id="successful-sign-up-modal__close" title="Close" class="successful-sign-up-modal__close">×</button>
+            <h1>You have successfully signed up! Thanks for choosing Music App. Please, log in. </h1>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="scripts/serverLibrary.js"></script>
+<script type="text/javascript" src="scripts/systemLibrary.js"></script>
+<script type="text/javascript" src="scripts/init.js"></script>
+<script type="text/javascript" src="scripts/init2.js"></script>
+<script type="text/javascript" src="scripts/welcomePage/welcomePage.js"></script>
+
+</body>
+</html>

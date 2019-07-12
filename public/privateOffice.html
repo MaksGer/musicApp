@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<link rel="stylesheet" type="text/css" href="css/arcticmodal/jquery.arcticmodal-0.3.css">
+	<link rel="stylesheet" type="text/css" href="css/arcticmodal/dark.css">
+	<link rel="stylesheet" type="text/css" href="css/stylesPrivateOfficePage.css">
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width" , initial-scale="1.0">
+	<title>privateOffice</title>
+
+</head>
+<body class="privateOffice">
+
+<header class="header">
+
+	<article class="header__logo">Music App.</article>
+
+	<article class="header__descriptions">
+		<div class="header__title"> Hello,
+			<span class="header__loginName" id="userName"></span>
+		</div>
+		<div class="header__title">Find out what's in trend!</div>
+		<div class="header__title">Create your playlist!</div>
+	</article>
+
+	<article class="header__buttons">
+		<div class="header__reLogIn">
+			<button id="reLogIn" class="header__reLogInButton">Change user</button>
+		</div>
+		<div class="header__transferRatingPage">
+			<button id="transferRating" class="header__transferRatingPageButton">
+				View ratings
+			</button>
+		</div>
+		<div class="header__creaturePlayList">
+			<button id="creatureList" class="header__creaturePlayListButton">Create a playlist</button>
+		</div>
+	</article>
+</header>
+
+<div class="content">
+	<article class="content__defaultLists">
+		<h1 class="content__descriptions">Try our playlists collected for you</h1>
+		<div id="defLists" class="content__defaultListsContanier"></div>
+	</article>
+
+	<article class="content__userLists">
+		<h1 class="content__descriptions">Your own playlists</h1>
+		<div id="usLists" class="content__userListsContanier"></div>
+	</article>
+
+	<article class="content__modalWindow" style="display: none;">
+		<div class="listWindow box-modal" id="exampleModal_1">
+			<div class="listWindow__closeButton box-modal_close arcticmodal-close"></div>
+			<!--	1-я секция модального окна -->
+			<div id="listTitle" class="listWindow__listTitle"></div>
+			<!--	2-я секция модального окна -->
+			<div id="trackSelection" class="listWindow__trackSelection"></div>
+			<!--	3-я секция модального окна -->
+			<div id="playlist" class="listWindow__playlist"></div>
+			<!--	4-я секция модального окна -->
+			<div id="control" class="listWindow__control"></div>
+		</div>
+	</article>
+</div>
+
+<footer class="footer">
+	<div class="footer__copyright">&copy 2019</div>
+</footer>
+
+
+<!-- templates -->
+
+<!-- Шаблон для построения списков плейлистов -->
+<script id="listsTemplate" type="text/template">
+	<% for (let i=0; i < listArray.length; i++) { %>
+		<div class="content__<%=listClass%>ListsItem">
+			<div class="content__textItem"><%-listArray[i]%></div>
+		</div>
+	<% } %>
+</script>
+<!--	Шаблон для построения 1-й секции модального окна -->
+<!--	для события 'create' строится input для возможности назвать плей-лист -->
+<!--	для остальных событий строится подпись названия плей-листа -->
+<script id="listTitle1Template" type="text/template">
+	<% if (type === 'create') { %>
+		<h1 class="listWindow__description">How do you name your playlist?</h1>
+		<input id="playlistNameInput" class="listWindow__playlistNameInput" maxlength="40">
+	<% } else { %>
+		<h1 class="listWindow__description"><%- name %></h1>
+	<% } %>
+</script>
+<!--	Шаблон для построения 2-й секции модального окна -->
+<!--	секция строится только для событий 'create' или 'user'-->
+<script id="listSelectionTemplate" type="text/template">
+	<% if (type === 'create' || type === 'user' ) { %>
+		<div class="listWindow__chooseArea">
+			<div class="listWindow__chooseAreaItem">
+				<label class="listWindow__label"> Choose the name of the music artist from our database
+					<select id="perfNames" class="listWindow__select"
+									onchange="if (this.selectedIndex) createSongSelect();">
+					</select>
+				</label>
+			</div>
+			<div class="listWindow__chooseAreaItem">
+				<label class="listWindow__label"> Select the track of the selected artist
+					<select id="trackNames" class="listWindow__select">	</select>
+				</label>
+			</div>
+		</div>
+		<button id="addTrack" class="listWindow__addTrackButton">Add track</button>
+	<% } %>
+</script>
+<!--	Шаблон для построения 3-й секции модального окна -->
+<!--	для события 'create' плей-лист пустой -->
+<!--	для события 'default' на треках плей-листа не строятся кнопки удаления трека -->
+<script id="playlistTemplate" type="text/template">
+	<% if (type !== 'default') { %>
+		<h2>Your playlist:</h2>
+	<% } %>
+	<ol id="playlistArea" class="listWindow__playlistArea">
+		<% if (type !== 'create') { %>
+			<% for (let i = 0; i < playlist.length; i++) { %>
+				<li class="listWindow__playlistAreaItem"
+						data-index="<%= i %>"
+						data-performer="<%= playlist[i].performer %>"
+						data-song="<%= playlist[i].soundName %>">
+					<span class=""><%- playlist[i].performer %></span>
+					<span> - </span>
+					<span class=""><%- playlist[i].soundName %></span>
+					<% if (type !== 'default') { %>
+						<button class="listWindow__delTrackButton">X</button>
+					<% } %>
+				</li>
+			<% } %>
+		<% } %>
+	</ol>
+</script>
+<!--	Шаблон для построения 4-й секции модального окна -->
+<!--	кнопка Delete строится только для события 'user' -->
+<!--	кнопка Play не строится для события 'create' -->
+<!--	кнопка фиксации состояния плей-листа строится для событий 'user' и 'create', -->
+<!--	но подписываются по разному -->
+<script id="listControlTemplate" type="text/template">
+	<% if (type === 'user') { %>
+		<button id="playlistDeletion" class="listWindow__controlButton">Delete</button>
+	<% } %>
+	<% if (type !== 'create') { %>
+		<button id="playlistPlaying" class="listWindow__controlButton">Play</button>
+	<% } %>
+	<% if (type === 'user' || type === 'create') { %>
+		<button id="playlistSaving" class="listWindow__controlButton">
+			<% if (type === 'create') { %>
+				Create
+			<% } else {%>
+				Save
+			<% } %>
+		</button>
+	<% } %>
+</script>
+<!--	Шаблон для построения выпадающих списков модального окна -->
+<script id="selectTemplate" type="text/template">
+	<option value="notSelected" disabled selected>Your choice...</option>
+	<% for (let key in base) { %>
+		<option value="<%= key %>"><%- key %></option>
+	<% } %>
+</script>
+
+<!-- scripts -->
+
+<!-- ./scripts/source -->
+<script type="text/javascript" src="scripts/source/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="scripts/source/jquery.arcticmodal-0.3.min.js"></script>
+<script type="text/javascript" src="scripts/source/lodash.js"></script>
+<!-- ./scripts -->
+<script type="text/javascript" src="scripts/serverLibrary.js"></script>
+<script type="text/javascript" src="scripts/systemLibrary.js"></script>
+<!-- ./scripts/privateOffiсePage -->
+<script type="text/javascript" src="scripts/privateOffiсePage/privateOfficeScript.js"></script>
+<script type="text/javascript" src="scripts/privateOffiсePage/createModalLibrary.js"></script>
+<script type="text/javascript" src="scripts/privateOffiсePage/manageListLibrary.js"></script>
+<script type="text/javascript" src="scripts/privateOffiсePage/modalEventLibrary.js"></script>
+</body>
+</html>

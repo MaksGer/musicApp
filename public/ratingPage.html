@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<link rel="stylesheet" type="text/css" href="css/stylesRatingPage.css">
+	<link rel="stylesheet" href="fonts/fontawesome/all.min.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width" , initial-scale="1.0">
+	<title>Title</title>
+</head>
+<body>
+<div class="header">
+	<div class="header__logo">Music App.</div>   <!-- здесь можно добавить ссылку на страницу пользователя -->
+</div>
+<div class="wrapper-root">
+	<ul id="wrapper-button-list" class="wrapper-button-list">
+		<li class="raiting-list"><button class="raiting-button" data-index="10">Top-10</button></li>
+		<li class="raiting-list"><button class="raiting-button" data-index="25">Top-25</button></li>
+		<li class="raiting-list"><button class="raiting-button" data-index="50">Top-50</button></li>
+		<li class="raiting-list"><button class="raiting-button" data-index="100">Top-100</button></li>
+	</ul>
+	<div class="wrapper__text" id="wrapper__text">Choose chart.</div>
+	<div class="wrapper-list">
+		<ol id="trackList">
+		</ol>
+		<button class="trackList_btn" id="trackList_btn">Show more</button>
+	</div>
+</div>
+<div class="footer">
+	<div class="footer__copyright">&copy 2019</div>
+</div>
+<script type="text/javascript" src="scripts/serverLibrary.js"></script>
+<script type="text/javascript" src="scripts/systemLibrary.js"></script>
+<script type="text/javascript" src="scripts/ratingPage/rating.js"></script>
+</body>
+</html>

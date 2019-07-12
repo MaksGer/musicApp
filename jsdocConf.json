@@ -1,0 +1,5 @@
+{
+  "source": {
+    "include": ["./public/scripts", "./public/scripts/privateOffiсePage"]
+  }
+}

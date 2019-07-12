@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: privateOffiсePage/privateOfficeScript.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: privateOffiсePage/privateOfficeScript.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** прием имени активного пользователя
+ * getFromServer() находится в "scripts/serverLibrary.js"
+ */
+;const ACTIVE_USER = JSON.parse(getFromServer('activeUser'));
+/**
+ * если нет активного пользователя - вернуться на welcomePage
+ * goTo() находится в "scripts/systemLibrary.js"
+ */
+if (!ACTIVE_USER){goTo('index.html');}
+
+/** Обнуляем объект playlist на "сервере"*/
+overwriteToServer('playlist', JSON.stringify(null));
+
+/** Прием глобальных данных данных (объект БД музыки и объект пользователей)
+ * getFromServer() находится в "scripts/serverLibrary.js"
+ * */
+let musicDataBase = JSON.parse(getFromServer('musicDataBase'));
+let users = JSON.parse(getFromServer('users'));
+
+/** Определение объекта целей для работы с DOM */
+let targetsGlobal = {
+	/** Поле для имени пользователя */
+	usName : document.getElementById('userName'),
+	/** Кнопка релогина */
+	reLog : document.getElementById('reLogIn'),
+	/** Кнопка вызова рейтингов */
+	transRating : document.getElementById('transferRating'),
+	/** Кнопка создания пользовательского плейлиста */
+	creListWindow : document.getElementById('creatureList'),
+	/** Контейнер дефолтных плейлистов */
+	defList : document.getElementById('defLists'),
+	/** Контейнер пользовательских плейлистов */
+	usList : document.getElementById('usLists'),
+	/** Шаблон для построения списка плейлистов */
+	listsTemplate: document.getElementById('listsTemplate')
+};
+
+/** Построение DOM */
+targetsGlobal.usName.innerText = ACTIVE_USER;
+targetsGlobal.defList.innerHTML = getLists();
+targetsGlobal.usList.innerHTML = getLists(ACTIVE_USER);
+
+
+/** Расстановка слушателей событий */
+targetsGlobal.reLog.addEventListener('click', () => {
+	/** goTo() находится в "scripts/systemLibrary.js" */
+	goTo('index.html');
+});
+targetsGlobal.transRating.addEventListener('click', () => {
+	/** goTo() находится в "scripts/systemLibrary.js" */
+	goTo('ratingPage.html', true);
+});
+/**
+ * startCreateModal() находится в "scripts/privateOffiсePage/createModalLibrary.js"
+ * 3 нижних события вызывают построение модального окна
+ * окно строится исходя из типа события:
+ * create - окно для построения плейлиста с нуля,
+ * default - окно для управления дефолтным плей-литом
+ * user - окно для управления плей-литом пользователя
+ * вызываем startCreateModal с двумя аргументами: 1-й - событие, 2-й - название плейлиста
+ */
+targetsGlobal.creListWindow.addEventListener('click', () => {
+	startCreateModal('create', '');
+});
+targetsGlobal.defList.addEventListener('click', ev => {
+	/** если кликнули именно по элементу списка */
+	if (ev.target.className === 'content__defaultListsItem' || ev.target.className === 'content__textItem') {
+		startCreateModal('default', ev.target.innerText);
+	}
+});
+targetsGlobal.usList.addEventListener('click', ev => {
+	/** если кликнули именно по элементу списка */
+	if (ev.target.classList[0] === 'content__userListsItem' || ev.target.className === 'content__textItem') {
+		startCreateModal('user', ev.target.innerText);
+	}
+});
+
+/**
+ * Функция построения DOM для списка плей-листов по шаблону .
+ * @param  {string} arguments[0] - имя активного пользователя.
+ * @return {string} Верстка для помещения в контейнер.
+ */
+function getLists() {
+	/**
+	 * Объявляем объект данных для функции-шаблонизатора.
+	 * (Смотреть "Шаблон для построения списков плейлистов")
+	 * @type {{listClass: string, listArray: array[string]}}
+	 * listClass - строковая переменная, для формирования названия класса DOM-элемента
+	 * listArray - список названий плейлистов
+	 */
+	let dataListsTemplate = {listClass: '', listArray: []};
+	let playLists;
+	/**
+		* формируем объект данных для шаблона
+		* если есть входные параметры, то функция запущена для построения списка плей-листов пользователя
+	 */
+	if (arguments.length) {
+		dataListsTemplate.listClass = 'user';
+		playLists = users[ACTIVE_USER].playLists; /** Смотри descriptions.js, объект users*/
+	/** иначе строим дефолтный список */
+	} else {
+		dataListsTemplate.listClass = 'default';
+		playLists = JSON.parse(getFromServer('defaultLists')); /** Смотри descriptions.js, объект defaultLists*/
+	}
+	let index = 0;
+	/** формируем массив названий плей-листов */
+	for (let key in playLists) {
+		dataListsTemplate.listArray[index] = key;
+		index++;
+	}
+
+	/** Смотри документацию по lodash */
+	let template = _.template(targetsGlobal.listsTemplate.innerHTML);
+	return template(dataListsTemplate);
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#clearLocal">clearLocal</a></li><li><a href="global.html#createTemplate">createTemplate</a></li><li><a href="global.html#getFromServer">getFromServer</a></li><li><a href="global.html#getJSON">getJSON</a></li><li><a href="global.html#getLists">getLists</a></li><li><a href="global.html#musicDataBase">musicDataBase</a></li><li><a href="global.html#newToServer">newToServer</a></li><li><a href="global.html#overwriteToServer">overwriteToServer</a></li><li><a href="global.html#startCreateModal">startCreateModal</a></li><li><a href="global.html#targetsGlobal">targetsGlobal</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.2</a> on Thu Jul 11 2019 03:25:23 GMT+0300 (GMT+03:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

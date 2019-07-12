@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: privateOffiсePage/createModalLibrary.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: privateOffiсePage/createModalLibrary.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** Глобальный объект целей для построения модального окна */
+;targetsCreateModal = {
+	title: document.getElementById('listTitle'),           /** 1-я секция модального окна */
+	selection: document.getElementById('trackSelection'),  /** 2-я секция модального окна */
+	playlist: document.getElementById('playlist'),         /** 3-я секция модального окна */
+	control: document.getElementById('control')            /** 4-я секция модального окна */
+};
+
+/**
+ * Функция построения модального окна.
+ *
+ * Модальное окно строится 3 способоми, в зависимости от типа события:
+ * - событие default - окно строится для управления дефолтными плей-листами;
+ * - событие user    - окно строится для управления плей-листами пользователя;
+ * - событие create  - создается новый плей-лист пользователя.
+ *
+ * Данная функция строит соответствующие DOM-элементы и передает управление manageList().
+ *
+ * В модальном окне предусмотрены 4 секции:
+ * 1-я секция - заголовок
+ * 2-я секция - панель добавления треков в плей лист
+ * 3-я секция - содержимое плейлиста
+ * 4-я секция - кнопки управления
+ * ( Смотри шаблоны
+ * "Шаблон для построения 1-й секции модального окна",
+ * "Шаблон для построения 2-й секции модального окна",
+ * "Шаблон для построения 3-й секции модального окна",
+ * "Шаблон для построения 4-й секции модального окна")
+ *
+ * @param  {string} type - тип события.
+ * @param  {string} namePlaylist - название плей-листа.
+ * @return {undefined} Функция ничего не возвращает.
+ */
+function startCreateModal(type, namePlaylist) {
+	/** старт модального окна
+	 * (https://arcticlab.ru/arcticmodal/)
+	 */
+	$(function () {
+		$('#exampleModal_1').arcticmodal();
+	});
+	/** получаем массив треков выбранного плейлиста */
+	let playlist = getPlaylist(type, namePlaylist);
+
+	/** Построение DOM */
+	targetsCreateModal.title.innerHTML = createTemplate('listTitle1Template', type, namePlaylist);
+	targetsCreateModal.selection.innerHTML = createTemplate('listSelectionTemplate', type);
+	targetsCreateModal.playlist.innerHTML = createTemplate('playlistTemplate', type, namePlaylist, playlist);
+	targetsCreateModal.control.innerHTML = createTemplate('listControlTemplate', type);
+
+	/** manageList() находится в "scripts/privateOffiсePage/manageListLibrary.js" */
+	manageList(type);
+
+
+	/**
+	 * Функция возвращает массив треков плей-листа в зависимости от type.
+	 *
+	 * @param  {string} type - тип события.
+	 * @param  {string} namePlaylist - название плей-листа.
+	 * @return {array}  Массив треков. ( Смотри descriptions.js, объект playlist )
+	 */
+	function getPlaylist(type, namePlaylist){
+		if (type === 'create') {
+			return null; /** При этом событии плей-листа нет*/
+		} else if (type === 'default') {
+				return JSON.parse(getFromServer('defaultLists'))[namePlaylist]; /** Смотри descriptions.js, объект defaultLists*/
+		} else {
+				return users[ACTIVE_USER].playLists[namePlaylist]; /** Смотри descriptions.js, объект users*/
+		}
+	}
+}
+
+/**
+ * Функция формирования верстки из заданного шаблона.
+ *
+ * @param  {string} idTemplate   - ID шаблона.
+ * @param  {string} type         - тип события.
+ * @param  {string} namePlaylist - название плей-листа.
+ * @param  {array}  arguments[3] - массив треков.
+ * @return {string} Верстка для помещения в контейнер.
+ */
+function createTemplate(idTemplate, type, namePlaylist) {
+	/** Объявляем data-объект для шаблона */
+	let dataTemplate = {};
+	/** Записываем в data-объект тип события */
+	dataTemplate.type = type;
+	/** При построении 3-й секции записываем в data-объект название плей-листа и массив треков */
+	if (type !== 'create') {
+		dataTemplate.name = namePlaylist;
+		dataTemplate.playlist = arguments[3];
+	}
+	/**
+	 * дополнительное событие 'select' для построения выпадающих списков модального окна
+	 * см. manageListLibrary.js
+ 	 */
+	if (type === 'select') {
+		dataTemplate.base = arguments[3];
+	}
+
+	/** Смотри документацию по lodash */
+	let template = _.template(document.getElementById(idTemplate).innerHTML);
+	return template(dataTemplate);
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#clearLocal">clearLocal</a></li><li><a href="global.html#createTemplate">createTemplate</a></li><li><a href="global.html#getFromServer">getFromServer</a></li><li><a href="global.html#getJSON">getJSON</a></li><li><a href="global.html#getLists">getLists</a></li><li><a href="global.html#musicDataBase">musicDataBase</a></li><li><a href="global.html#newToServer">newToServer</a></li><li><a href="global.html#overwriteToServer">overwriteToServer</a></li><li><a href="global.html#startCreateModal">startCreateModal</a></li><li><a href="global.html#targetsGlobal">targetsGlobal</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.2</a> on Thu Jul 11 2019 03:25:23 GMT+0300 (GMT+03:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

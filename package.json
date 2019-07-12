@@ -1,0 +1,15 @@
+{
+  "name": "07-01_musicapplication",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "help": "jsdoc --help",
+    "doc": "jsdoc ./public/scripts/init.js -c ./jsdocConf.json -d ./public/doc"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jsdoc": "^3.6.2"
+  }
+}

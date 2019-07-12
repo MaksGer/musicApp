@@ -1,0 +1,139 @@
+body {
+margin: 0;
+}
+.header {
+    background-color: #000000;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.header__logo, .footer__copyright {
+    color: #ffffff;
+    margin-left: 10px;
+    font-size: 50px;
+    font-family: 'Cute Font', cursive;
+}
+.sign-up-button, .log-in-button {
+    background-color: #1DB954;
+    width: 166px;
+    height: 48px;
+    color: #ffffff;
+    border-radius: 500px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition-duration: .3s;
+    font-weight: 700;
+    text-align: center;
+    margin-right: 20px;
+
+}
+.sign-up-button:hover, .log-in-button:hover {
+    background-color: #1ED760;
+}
+.wrapper {
+    background: url('../images/hero-sm.jpg') center center;
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
+    width: 100%;
+    height: calc(100vh - 140px);
+}
+
+.wrapper__text {
+    color: #ffffff;
+    font-size: 50px;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bolder;
+    padding: 7%;
+}
+.wrapper__buttons {
+    margin: 0 auto;
+    width: 376px;
+}
+.footer {
+    background-color: #000000;
+    height: 70px;
+}
+.sign-up-modal, .log-in-modal, .successful-sign-up-modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(0,3,5,0.7);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.sign-up-modal__body, .log-in-modal__body, .successful-sign-up-modal__body {
+    width: 320px;
+    background: #ffffff;
+    position: relative;
+}
+.sign-up-modal__form, .log-in-modal__form  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sign-up-modal__form h1,.log-in-modal__form h1, .successful-sign-up-modal__body h1  {
+    text-align: center;
+    color: #000000;
+    font-size: 28px;
+    font-family: 'Cute Font', cursive;
+
+}
+.sign-up-modal__form input,.log-in-modal__form input {
+    margin-bottom: 23px;
+    height: 20px;
+    width: 85%;
+    padding-left: 6px;
+}
+
+.sign-up-modal__form__button, .log-in-modal__form__button {
+    background-color: #000000;
+    width: 133px;
+    height: 38px;
+    color: #ffffff;
+    border-radius: 500px;
+    font-family: 'Cute Font', cursive;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 22px;
+    transition-duration: .3s;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.sign-up-modal__form__button:hover {
+
+
+}
+.sign-up-modal__close, .log-in-modal__close, .successful-sign-up-modal__close {
+    position: absolute;
+    left: 90%;
+    top: -5%;
+    font-size: 45px;
+    font-family: 'Cute Font', cursive;
+    font-weight: 700;
+    color: #000;
+    opacity: 0.5;
+    text-decoration: none;
+    border: none;
+    background: none;
+}
+.log-in-modal__close:hover, .sign-up-modal__close:hover, .successful-sign-up-modal__close:hover {
+    cursor: pointer;
+    opacity: 0.75;
+}
+.form-error {
+    display: none;
+    margin-bottom: 23px;
+    color: red;
+    font-size: 14px;
+}

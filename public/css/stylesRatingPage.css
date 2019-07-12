@@ -1,0 +1,111 @@
+body {
+  margin: 0; }
+
+.header {
+  background-color: #000000;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
+.header__logo, .footer__copyright {
+  color: #ffffff;
+  margin-left: 10px;
+  font-size: 50px;
+  font-family: 'Cute Font', cursive; }
+
+.wrapper-root {
+  background: url("../images/hero-sm.jpg") fixed center center;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  width: 100%;
+  min-height: calc(100vh - 140px); }
+
+.footer {
+  background-color: #000000;
+  height: 70px; }
+
+.wrapper-button-list {
+  width: 772px;
+  margin: 20px auto; }
+
+.raiting-button {
+  background-color: #1DB954;
+  width: 166px;
+  height: 48px;
+  color: #ffffff;
+  border-radius: 500px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  margin-right: 20px; }
+  .raiting-button:focus {
+    background-color: #1d33fd; }
+
+.raiting-button:hover, .trackList_btn:hover {
+  background-color: #1ED760; }
+
+.wrapper__text {
+  color: #ffffff;
+  font-size: 50px;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bolder;
+  padding: 10%; }
+
+.raiting-list {
+  list-style-type: none;
+  display: inline; }
+
+.trackList_btn {
+  display: none;
+  margin: 0 auto;
+  background-color: #1DB954;
+  width: 166px;
+  height: 48px;
+  color: #ffffff;
+  border-radius: 500px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center; }
+
+.stars-outer {
+  position: relative;
+  display: inline-block;
+  float: right; }
+  .stars-outer::before {
+    content: "\f005 \f005 \f005 \f005 \f005";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 200;
+    color: white; }
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0; }
+  .stars-inner::before {
+    content: "\f005 \f005 \f005 \f005 \f005";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #fdfd01; }
+
+.wrapper-list {
+  width: 850px;
+  margin: 20px auto;
+  color: white; }
+
+.trackList-elements {
+  font-size: 22px;
+  padding-bottom: 10px; }

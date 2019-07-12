@@ -1,0 +1,246 @@
+.privateOffice {
+	margin: 0;
+	padding: 0;
+	font-size: 18px;
+	font-family: 'Cute Font', cursive;
+	color: #ffffff;
+}
+
+.header {
+	background: linear-gradient(to bottom, #000000 0%, #000000 15%, #003d52 50%, #000000 90%, #000000 100%);
+}
+
+.header__logo, .footer__copyright {
+	box-sizing: border-box;
+	height: 70px;
+	padding: 10px;
+	font-size: 40px;
+	line-height: 100%;
+}
+
+.header__descriptions, .header__buttons {
+	box-sizing: border-box;
+	overflow: hidden;
+	margin: 0;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+}
+
+.header__title, .header__reLogIn, .header__transferRatingPage, .header__creaturePlayList {
+	box-sizing: border-box;
+	width: 200px;
+	margin: 0 50px;
+	padding: 10px;
+	text-align: center;
+}
+
+.header__creaturePlayList {
+	margin-bottom: 10px;
+}
+
+.header__reLogInButton, .header__transferRatingPageButton, .header__creaturePlayListButton{
+	width: 166px;
+	height: 48px;
+	border: none;
+	border-radius: 500px;
+	background-color: #1DB954;
+	cursor: pointer;
+	outline: none;
+	transition-duration: .3s;
+	color: #ffffff;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.content {
+	box-sizing: border-box;
+	overflow: hidden;
+	margin: 0;
+	padding: 0 20px;
+	background-color: #276f84;
+}
+
+.content__defaultLists, .content__userLists {
+	margin: 40px 0;
+}
+
+.content__descriptions::after {
+	content: "";
+	display: block;
+	width: 100%;
+	margin-top: 10px;
+	border: solid #fff 1px;
+}
+
+.content__defaultListsContanier, .content__userListsContanier {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+}
+
+.content__defaultListsItem, .content__userListsItem {
+	box-sizing: border-box;
+	overflow: hidden;
+	width: 270px;
+	height: 130px;
+	margin: 10px;
+	padding: 0 30px;
+	background: url('../images/phone.png') no-repeat 0 0;
+	background-size: contain;
+	cursor: pointer;
+}
+
+.content__textItem {
+	overflow: hidden;
+	padding: 30px 5px;
+	text-align: center;
+	font-size: 25px;
+}
+
+.footer {
+	background-color: #000000;
+	height: 70px;
+}
+
+.listWindow__closeButton {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background: url('../images/close.png') no-repeat 0 0;
+	background-size: contain;
+	border: solid #000 1px;
+	right: -30px;
+	top: -30px;
+	cursor: pointer;
+	outline: none;
+	z-index: 1000;
+}
+
+.listWindow__description {
+	text-align: center;
+}
+
+.listWindow__playlistNameInput {
+	display: block;
+	width: 400px;
+	height: 30px;
+	margin: 10px auto;
+	text-align: center;
+	font-size: 20px;
+	line-height: 100%;
+}
+
+.listWindow__chooseArea {
+	display: flex;
+	width: 520px;
+	margin: 30px 0 20px 0;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+}
+
+.listWindow__chooseAreaItem {
+	overflow: hidden;
+	margin: 0 10px;
+}
+
+
+
+.listWindow__select {
+	display: block;
+	width: 100%;
+	height: 25px;
+	margin: 10px 0;
+}
+
+.listWindow__addTrackButton, .listWindow__addPlaylistButton {
+	display: block;
+	width: 150px;
+	height: 25px;
+	margin: 0 auto;
+	border-radius: 5px;
+	outline: none;
+}
+
+.listWindow__playlist::before {
+	content: "";
+	display: block;
+	width: 100%;
+	margin-bottom: 20px;
+	border: solid #ffffff 1px;
+}
+
+.listWindow__playlist {
+	overflow: hidden;
+	position: relative;
+	height: 230px;
+	padding: 10px;
+}
+
+.listWindow__addPlaylistButton {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+
+.listWindow__playlistArea {
+	box-sizing: border-box;
+	overflow: auto;
+	background-color: #ffffff;
+	height: 180px;
+	padding-left: 30px;
+	color: black;
+}
+
+.listWindow__playlistAreaItem {
+	height: 20px;
+	margin: 5px;
+	padding: 2px;
+	position: relative;
+}
+
+.listWindow__playlistAreaItem:hover {
+	border: solid lightskyblue;
+}
+
+.listWindow__delTrackButton {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	background-color: crimson;
+	border-radius: 50%;
+	color: #ffffff;
+	outline: none;
+	text-align: center;
+}
+
+.listWindow__control {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	margin-top: 20px;
+}
+
+.listWindow__controlButton {
+	width: 100px;
+	height: 50px;
+	border-radius: 10px;
+	outline: none;
+}
+
+@media (max-width: 768px) {
+	.header__reLogIn, .header__transferRatingPage, .header__creaturePlayList {
+		margin: 0 10px;
+	}
+}
+
+@media (max-width: 480px) {
+	.header__reLogIn, .header__transferRatingPage, .header__creaturePlayList {
+		margin: 0;
+	}
+}
